@@ -1,47 +1,31 @@
-# Astro Starter Kit: Minimal
+# singletrack: MultiTracks files in ProPresenter without phoning home
+
+`singletrack` is an SPA that takes ProPresenter presentation uploads and downloads a version without the MultiTracks licensing information. This means you can use your ProPresenter presentations in situations with no internet without having to worry about where they came from.
+
+## Running locally
+
+We're still in the early days, so things might be rough.
+
+### Requirements
+
+- [Yarn](https://yarnpkg.com) to build and run the project.
+
+### Steps
 
 ```sh
-yarn create astro@latest -- --template minimal
+$ git clone https://github.com/ryanq/singletrack
+$ cd singletrack
+$ yarn
+$ yarn astro dev
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
+#### Compiling the ProPresenter Protobufs files
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+These instructions are coming sometime soon...
 
-## 🚀 Project Structure
+## Roadmap
 
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `yarn install`             | Installs dependencies                            |
-| `yarn dev`             | Starts local dev server at `localhost:4321`      |
-| `yarn build`           | Build your production site to `./dist/`          |
-| `yarn preview`         | Preview your build locally, before deploying     |
-| `yarn astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `yarn astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- [ ] Build out the landing page
+- [ ] Handle file uploads through the file input
+- [ ] Handle file drops
+- [ ] Write instructions for building the Protobuf definitions
