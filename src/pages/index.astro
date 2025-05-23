@@ -6,11 +6,99 @@
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Doto:wght@700" rel="stylesheet">
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<title>SingleTrack: unlock your MultiTracks presentations</title>
 	</head>
+
 	<body>
-		<h1>Astro</h1>
+
+    <svg viewBox="-1000 -1000 2000 2000">
+      <defs>
+        <mask id="tracks">
+          <rect x="-750" y="-750" width="1500" height="1500" fill="white" />
+          <rect x="-550" y="-290" width="520" height="75" rx="37.5" fill="black" />
+          <rect x="-550" y="-170" width="730" height="75" rx="37.5" fill="black" />
+          <rect x="-550" y="-50" width="975" height="75" rx="37.5" fill="black" />
+          <rect x="-550" y="70" width="900" height="75" rx="37.5" fill="black" />
+          <rect x="-550" y="190" width="645" height="75" rx="37.5" fill="black" />
+        </mask>
+
+        <path id="outer" d="M-830 0A830 830 180 1 1 830 0 830 830 180 1 1 -830 0"/>
+        <path id="inner" d="M-600 0A600 600 180 1 1 600 0 600 600 180 1 1 -600 0"/>
+      </defs>
+
+      <circle class="drop-zone" cx="0" cy="0" r="500" mask="url(#tracks)" />
+
+      <g class="spinning slower">
+        <text><textPath href="#outer" font-size="220">SingleTrack your files</textPath></text>
+      </g>
+      
+      <g class="spinning" transform="rotate(180)">
+        <text><textPath href="#inner" font-size="200">Drop here or click to browse</textPath></text>
+      </g>
+    </svg>
+
 	</body>
 </html>
+
+<style>
+  :root {
+    color-scheme: light dark;
+
+    font-family: 'Doto', system-ui, sans-serif;
+    font-size: 24px;
+  }
+
+  body {
+    display: grid;
+    place-content: center;
+    min-height: 100dvh;
+
+    background-image: radial-gradient(
+      circle at center center,
+      orange 0 30vmin,
+      transparent 60vmin
+    ),
+    repeating-conic-gradient(orange 0deg 12deg, gold 12deg 15deg);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    body {
+      background-image: radial-gradient(
+        circle at center center,
+        #222 0 30vmin,
+        transparent 60vmin
+      ),
+      repeating-conic-gradient(#222 0deg 12deg, orange 12deg 15deg);
+    }
+  }
+
+  svg {
+    width: 75vmin;
+    aspect-ratio: 1;
+    fill: light-dark(#222, #ddd);
+  }
+
+  @keyframes rotation {
+    from { rotate: 360deg; }
+    to { rotate: 0deg; }
+  }
+
+  .spinning {
+    rotate: 42deg;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .spinning {
+      animation: rotation linear infinite 25s;
+    }
+  
+    .slower {
+      animation-duration: 40s;
+    }
+  }
+</style>
