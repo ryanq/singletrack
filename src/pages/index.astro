@@ -31,7 +31,7 @@
         <path id="inner" d="M-600 0A600 600 180 1 1 600 0 600 600 180 1 1 -600 0"/>
       </defs>
 
-      <circle class="drop-zone" cx="0" cy="0" r="500" mask="url(#tracks)" />
+      <circle id="drop-zone" cx="0" cy="0" r="500" mask="url(#tracks)" />
 
       <g class="spinning slower">
         <text><textPath href="#outer" font-size="220">SingleTrack your files</textPath></text>
@@ -41,6 +41,8 @@
         <text><textPath href="#inner" font-size="200">Drop here or click to browse</textPath></text>
       </g>
     </svg>
+
+    <input type="file" id="files" multiple />
 
 	</body>
 </html>
@@ -77,6 +79,10 @@
     }
   }
 
+  input[type='file'] {
+    display: none;
+  }
+
   svg {
     width: 75vmin;
     aspect-ratio: 1;
@@ -101,4 +107,53 @@
       animation-duration: 40s;
     }
   }
+
+  .highlight {
+    outline-width: 1rem;
+    outline-style: dashed;
+    outline-color: #222;
+    outline-offset: 1rem;
+    border-radius: 1000px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .highlight {
+      outline-color: orange;
+    }
+  }
 </style>
+
+<script>
+  let file_input = document.getElementById('files')
+  let drop_zone = document.getElementById('drop-zone')
+
+  // Set up click-to-upload behavior
+  if (file_input && drop_zone) {
+    drop_zone.addEventListener('click', () => file_input.click())
+    file_input.addEventListener('change', handle_upload, false)
+  }
+
+  // Set up drop-to-upload behavior
+  if (drop_zone) {
+    // Prevent the default behaviors
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+      drop_zone.addEventListener(eventName, e => { e.preventDefault(), e.stopPropagation() }, false);
+    });
+  
+    // Manage highlighting the drop zone
+    ['dragenter', 'dragover'].forEach(eventName => {
+      drop_zone.addEventListener(eventName, () => drop_zone.classList.add('highlight'), false);
+    });
+    ['dragleave', 'drop'].forEach(eventName => {
+      drop_zone.addEventListener(eventName, () => drop_zone.classList.remove('highlight'), false);
+    });
+  
+    drop_zone.addEventListener('drop', handle_drop, false);
+  }
+
+  async function handle_upload(e: Event) {}
+
+  async function handle_drop(e: DragEvent) {}
+
+  async function process_file(file: File) {}
+</script>
