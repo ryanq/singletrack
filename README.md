@@ -9,6 +9,7 @@ We're still in the early days, so things might be rough.
 ### Requirements
 
 - [Yarn](https://yarnpkg.com) to build and run the project.
+- [protobuf](https://protobuf.dev) to build the TypeScript files for decoding presentations.
 
 ### Steps
 
@@ -21,7 +22,22 @@ $ yarn astro dev
 
 #### Compiling the ProPresenter Protobufs files
 
-These instructions are coming sometime soon...
+1. Download the ProPresenter Protobufs definition files:
+
+    ```sh
+    $ mkdir /tmp/singletrack
+    $ git clone http://github.com/greyshirtguy/ProPresenter7-Proto /tmp/singletrack/pb
+    ```
+
+2. Generate new TypeScript files:
+
+    ```sh
+    $ protoc \
+        --plugin=protoc-gen-ts_proto=./node_modules/.bin/protoc-gen-ts_proto \
+        --ts_proto_out=./src/generated \
+        -I /tmp/singletrack/pb/Proto7.16.2/ \
+        presentation.proto
+    ```
 
 ## Roadmap
 
@@ -29,4 +45,4 @@ These instructions are coming sometime soon...
 - [x] Handle file uploads through the file input
 - [x] Handle file drops
 - [ ] Process files in an action
-- [ ] Write instructions for building the Protobuf definitions
+- [x] Write instructions for building the Protobuf definitions
