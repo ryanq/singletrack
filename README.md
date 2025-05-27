@@ -26,6 +26,7 @@ These instructions are coming sometime soon...
 ## Roadmap
 
 - [x] Build out the landing page
-- [ ] Handle file uploads through the file input
-- [ ] Handle file drops
+- [x] Handle file uploads through the file input
+- [x] Handle file drops
+- [ ] Process files in an action
 - [ ] Write instructions for building the Protobuf definitions

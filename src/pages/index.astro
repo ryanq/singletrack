@@ -151,9 +151,21 @@
     drop_zone.addEventListener('drop', handle_drop, false);
   }
 
-  async function handle_upload(e: Event) {}
+  async function handle_upload(e: Event) {
+    const files = (e.target as HTMLInputElement | undefined)?.files || new FileList()
 
-  async function handle_drop(e: DragEvent) {}
+    for (const file of files) {
+      await process_file(file)
+    }
+  }
+
+  async function handle_drop(e: DragEvent) {
+    const files = e.dataTransfer?.files || new FileList()
+
+    for (const file of files) {
+      await process_file(file)
+    }
+  }
 
   async function process_file(file: File) {}
 </script>
