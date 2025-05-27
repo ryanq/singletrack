@@ -124,6 +124,8 @@
 </style>
 
 <script>
+import { actions } from "astro:actions";
+
   let file_input = document.getElementById('files')
   let drop_zone = document.getElementById('drop-zone')
 
@@ -167,5 +169,18 @@
     }
   }
 
-  async function process_file(file: File) {}
+  async function process_file(file: File) {
+    const form_data = new FormData()
+    form_data.set('file', file)
+
+    const { data, error } = await actions.singletrack(form_data)
+
+    if (error) {
+      alert(`Unable to process file '${file.name}'.`)
+      console.log(error)
+      return
+    }
+
+    alert(data?.name)
+  }
 </script>
