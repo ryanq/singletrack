@@ -56,26 +56,31 @@
   }
 
   body {
+    position: relative;
     display: grid;
     place-content: center;
     min-height: 100dvh;
+  }
+
+  body::before {
+    --_base: light-dark(orange, #222);
+    --_stripe: light-dark(gold, orange);
+    
+    content: '';
+    position: absolute;
+    inset: -50%;
+    z-index: -1;
 
     background-image: radial-gradient(
       circle at center center,
-      orange 0 30vmin,
+      var(--_base) 0 30vmin,
       transparent 60vmin
     ),
-    repeating-conic-gradient(orange 0deg 12deg, gold 12deg 15deg);
-  }
+    repeating-conic-gradient(var(--_base) 0deg 8deg, var(--_stripe) 8deg 9deg);
+    background-position: center;
 
-  @media (prefers-color-scheme: dark) {
-    body {
-      background-image: radial-gradient(
-        circle at center center,
-        #222 0 30vmin,
-        transparent 60vmin
-      ),
-      repeating-conic-gradient(#222 0deg 12deg, orange 12deg 15deg);
+    @media (prefers-reduced-motion: no-preference) {
+      animation: rotation 80s linear infinite;
     }
   }
 
@@ -89,23 +94,16 @@
     fill: light-dark(#222, #ddd);
   }
 
-  @keyframes rotation {
-    from { rotate: 360deg; }
-    to { rotate: 0deg; }
-  }
-
   .spinning {
     rotate: 42deg;
+    
+    @media (prefers-reduced-motion: no-preference) {
+        animation: rotation linear infinite reverse 25s;
+    }
   }
-
-  @media (prefers-reduced-motion: no-preference) {
-    .spinning {
-      animation: rotation linear infinite 25s;
-    }
   
-    .slower {
-      animation-duration: 40s;
-    }
+  .slower {
+    animation-duration: 40s;
   }
 
   .highlight {
@@ -114,12 +112,15 @@
     outline-color: #222;
     outline-offset: 1rem;
     border-radius: 1000px;
+    
+    @media (prefers-color-scheme: dark) {
+        outline-color: orange;
+    }
   }
 
-  @media (prefers-color-scheme: dark) {
-    .highlight {
-      outline-color: orange;
-    }
+  @keyframes rotation {
+    from { rotate: 0deg; }
+    to { rotate: 360deg; }
   }
 </style>
 
