@@ -46,3 +46,4 @@ $ yarn astro dev
 - [x] Handle file drops
 - [x] Process files in an action
 - [x] Write instructions for building the Protobuf definitions
+- [ ] Handle errors in processing files
