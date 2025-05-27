@@ -181,6 +181,11 @@ import { actions } from "astro:actions";
       return
     }
 
-    alert(data?.name)
+    const blob = new Blob([data?.output])
+    const url = window.URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = url
+    link.download = file.name
+    link.click()
   }
 </script>

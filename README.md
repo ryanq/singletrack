@@ -44,5 +44,5 @@ $ yarn astro dev
 - [x] Build out the landing page
 - [x] Handle file uploads through the file input
 - [x] Handle file drops
-- [ ] Process files in an action
+- [x] Process files in an action
 - [x] Write instructions for building the Protobuf definitions
